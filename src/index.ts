@@ -18,8 +18,8 @@ dotenv.config({ path: "./config/config.env" });
 connectDB();
 
 // Route files
-//
-//
+import locations from "./routes/locations";
+import users from "./routes/users";
 
 // Create a new express application instance
 const app: express.Application = express();
@@ -53,8 +53,8 @@ app.use(hpp());
 app.use(cors());
 
 // Mount routers
-//
-//
+app.use("./locations", locations);
+app.use("./users", users);
 
 const PORT = process.env.PORT || 5000;
 
