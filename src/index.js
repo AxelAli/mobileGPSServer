@@ -9,20 +9,25 @@ import rateLimit from "express-rate-limit";
 import hpp from "hpp";
 import cors from "cors";
 
-import connectDB from "./config/db";
+import connectDB from "./config/db.js";
+
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Load ENV variables
-dotenv.config({ path: "./config/config.env" });
+dotenv.config({ path: __dirname + "/./config/config.env" });
 
 // Connect to database
 connectDB();
 
 // Route files
-import locations from "./routes/locations";
-import users from "./routes/users";
+import locations from "./routes/locations.js";
+import users from "./routes/users.js";
 
 // Create a new express application instance
-const app: express.Application = express();
+const app = express();
 
 // Body parser
 app.use(express.json());
@@ -39,7 +44,7 @@ app.use(mongoSanitize());
 app.use(helmet());
 
 // Rate limiting
-const limiter: rateLimit.RateLimit = rateLimit({
+const limiter = rateLimit({
   windowMs: 10 * 60 * 1000,
   max: 100,
 });
