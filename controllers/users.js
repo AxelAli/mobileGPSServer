@@ -3,7 +3,7 @@ import generateToken from "../utils/generateToken.js";
 import User from "../models/User.js";
 
 // @desc    Auth user & get token
-// @route   POST /users/login
+// @route   POST /api/users/login
 // @access  Public
 const authUser = asyncHandler(async (req, res) => {
   const { fingerprintString } = req.body;
@@ -23,7 +23,7 @@ const authUser = asyncHandler(async (req, res) => {
 });
 
 // @desc    Register a new user
-// @route   POST /users/
+// @route   POST /api/users/
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
   const { fingerprintString } = req.body;
@@ -52,7 +52,7 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 // @desc    Get user by ID
-// @route   GET /users/:id
+// @route   GET /api/users/:id
 // @access  Private
 const getUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
