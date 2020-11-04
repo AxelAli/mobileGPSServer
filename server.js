@@ -21,7 +21,6 @@ connectDB();
 // Route files
 import locations from './routes/locations.js';
 import users from './routes/users.js';
-import auth from './routes/auth.js';
 
 // Create a new express application instance
 const app = express();
@@ -60,7 +59,6 @@ app.use(cors());
 // Mount routers
 app.use('/api/locations', locations);
 app.use('/api/users', users);
-app.use('/api/auth', auth);
 
 const PORT = process.env.PORT || 5000;
 

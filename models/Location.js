@@ -1,53 +1,56 @@
 import mongoose from 'mongoose';
 import geocoder from '../utils/geocoder.js';
 
-const LocationSchema = new mongoose.Schema({
-	home: {
-		type: Object,
-		required: true,
-	},
-	current: {
-		type: Object,
-		required: true,
-	},
-	homeLocation: {
-		type: {
-			type: String,
-			enum: ['Point'],
+const LocationSchema = new mongoose.Schema(
+	{
+		home: {
+			type: Object,
+			required: true,
 		},
-		coordinates: {
-			type: [Number],
-			index: '2dsphere',
+		current: {
+			type: Object,
+			required: true,
 		},
-		formattedAddress: String,
-		street: String,
-		city: String,
-		state: String,
-		zipcode: String,
-		country: String,
-	},
-	currentLocation: {
-		type: {
-			type: String,
-			enum: ['Point'],
+		homeLocation: {
+			type: {
+				type: String,
+				enum: ['Point'],
+			},
+			coordinates: {
+				type: [Number],
+				index: '2dsphere',
+			},
+			formattedAddress: String,
+			street: String,
+			city: String,
+			state: String,
+			zipcode: String,
+			country: String,
 		},
-		coordinates: {
-			type: [Number],
-			index: '2dsphere',
+		currentLocation: {
+			type: {
+				type: String,
+				enum: ['Point'],
+			},
+			coordinates: {
+				type: [Number],
+				index: '2dsphere',
+			},
+			formattedAddress: String,
+			street: String,
+			city: String,
+			state: String,
+			zipcode: String,
+			country: String,
 		},
-		formattedAddress: String,
-		street: String,
-		city: String,
-		state: String,
-		zipcode: String,
-		country: String,
+		user: {
+			type: mongoose.Schema.ObjectId,
+			ref: 'User',
+			required: true,
+		},
 	},
-	user: {
-	  type: mongoose.Schema.ObjectId,
-	  ref: "User",
-	  required: true,
-	},
-});
+	{ timestamps: true }
+);
 
 LocationSchema.pre('save', async function (next) {
 	const loc = await geocoder.reverse(this.home);
