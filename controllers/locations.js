@@ -72,10 +72,18 @@ const updateLocation = asyncHandler(async (req, res) => {
 		throw new Error('User not authorised');
 	}
 
-	location = await Location.findByIdAndUpdate(req.params.id, req.body, {
-		new: true,
-		runValidators: true,
-	});
+	const { home, current } = req.body;
+
+	if (home) {
+		location.home = home;
+	}
+
+	if (current) {
+		location.current = current;
+	}
+
+
+	const updatedLocation = await location.save();
 
 	res.status(200).json(location);
 });

@@ -5,11 +5,9 @@ const LocationSchema = new mongoose.Schema(
 	{
 		home: {
 			type: Object,
-			required: true,
 		},
 		current: {
 			type: Object,
-			required: true,
 		},
 		homeLocation: {
 			type: {
@@ -53,38 +51,6 @@ const LocationSchema = new mongoose.Schema(
 );
 
 LocationSchema.pre('save', async function (next) {
-	const loc = await geocoder.reverse(this.home);
-	const loc1 = await geocoder.reverse(this.current);
-
-	this.homeLocation = {
-		type: 'Point',
-		coordinates: [loc[0].longitude, loc[0].latitude],
-		formattedAddress: loc[0].formattedAddress,
-		street: loc[0].streetName,
-		city: loc[0].city,
-		state: loc[0].stateCode,
-		zipcode: loc[0].zipcode,
-		country: loc[0].countryCode,
-	};
-
-	this.currentLocation = {
-		type: 'Point',
-		coordinates: [loc1[0].longitude, loc1[0].latitude],
-		formattedAddress: loc1[0].formattedAddress,
-		street: loc1[0].streetName,
-		city: loc1[0].city,
-		state: loc1[0].stateCode,
-		zipcode: loc1[0].zipcode,
-		country: loc1[0].countryCode,
-	};
-
-	this.home = undefined;
-	this.current = undefined;
-
-	next();
-});
-
-LocationSchema.pre('findOneAndUpdate', async function (next) {
 	if (this.home) {
 		const loc = await geocoder.reverse(this.home);
 
@@ -123,4 +89,5 @@ LocationSchema.pre('findOneAndUpdate', async function (next) {
 });
 
 const Location = mongoose.model('Location', LocationSchema);
+
 export default Location;
