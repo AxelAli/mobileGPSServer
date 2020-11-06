@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema(
 	{
@@ -37,7 +37,8 @@ UserSchema.methods.getSignedJwtToken = function () {
 UserSchema.methods.matchPin = async function (enteredPin) {
 	console.log(enteredPin);
 	console.log(this.pin);
-	return await bcrypt.compare(enteredPin, this.pin);
+	return enteredPin===this.pin
+	// return await bcrypt.compare(enteredPin, this.pin);
 };
 
 const User = mongoose.model('User', UserSchema);
