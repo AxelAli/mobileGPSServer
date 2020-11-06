@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
 import geocoder from '../utils/geocoder.js';
+import mongoose from 'mongoose';
 
 const LocationSchema = new mongoose.Schema(
 	{
@@ -53,7 +53,7 @@ const LocationSchema = new mongoose.Schema(
 LocationSchema.pre('save', async function (next) {
 	if (this.home) {
 		const loc = await geocoder.reverse(this.home);
-
+		
 		this.homeLocation = {
 			type: 'Point',
 			coordinates: [loc[0].longitude, loc[0].latitude],
