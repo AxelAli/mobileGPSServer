@@ -37,7 +37,7 @@ UserSchema.methods.getSignedJwtToken = function () {
 UserSchema.methods.matchPin = async function (enteredPin) {
 	console.log(enteredPin);
 	console.log(this.pin);
-	return enteredPin===this.pin
+	return enteredPin === this.pin;
 	// return await bcrypt.compare(enteredPin, this.pin);
 };
 
