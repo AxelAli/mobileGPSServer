@@ -21,7 +21,6 @@ const authUser = asyncHandler(async (req, res) => {
 		res
 			.status(401)
 			.json({ success: false, msg: 'Invalid email or password' });
-		throw new Error('Invalid email or password');
 	}
 });
 
@@ -55,7 +54,6 @@ const registerUser = asyncHandler(async (req, res) => {
 		res
 			.status(400)
 			.json({ success: false, msg: 'Invalid credentials' });
-		throw new Error('Invalid user data');
 	}
 });
 
@@ -78,7 +76,6 @@ const deleteUser = asyncHandler(async (req, res) => {
 		res.status(200).json({ success: true, msg: 'User removed' });
 	} else {
 		res.status(404).json({ success: false, msg: 'User not found' });
-		throw new Error('User not found');
 	}
 });
 
@@ -92,7 +89,6 @@ const getUserById = asyncHandler(async (req, res) => {
 		res.status(200).json(user);
 	} else {
 		res.status(404), json({ success: false, msg: 'User not found' });
-		throw new Error('User not found');
 	}
 });
 
@@ -113,7 +109,6 @@ const updateUser = asyncHandler(async (req, res) => {
 		});
 	} else {
 		res.status(404), json({ success: false, msg: 'User not found' });
-		throw new Error('User not found');
 	}
 });
 
