@@ -19,6 +19,7 @@ dotenv.config({ path: './config/config.env' });
 connectDB();
 
 // Route files
+import homes from './routes/homes.js';
 import locations from './routes/locations.js';
 import users from './routes/users.js';
 
@@ -57,13 +58,15 @@ app.use(hpp());
 app.use(cors());
 
 // Mount routers
-app.use('/api/locations', locations);
+app.use('/api/homes', homes);
 app.use('/api/users', users);
+app.use('/api/locations', locations);
 
 const PORT = process.env.PORT || 5000;
 
 const server = app.listen(PORT, () =>
 	console.log(
-		`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+		`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
+			.yellow.bold
 	)
 );
