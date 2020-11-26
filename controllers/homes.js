@@ -63,29 +63,23 @@ const createHome = asyncHandler(async (req, res) => {
 // @route   PUT /api/homes/:id
 // @access  Private
 const updateHome = asyncHandler(async (req, res) => {
-	const home = await Home.findById(req.params.id);
+	const homeCur = await Home.findById(req.params.id);
 
-	if (!home) {
+	if (!homeCur) {
 		res.status(404);
 		throw new Error('Home not found');
 	}
 
-	if (home.user.toString() !== req.user.id) {
+	if (homeCur.user.toString() !== req.user.id) {
 		res.status(401);
 		throw new Error('User not authorised');
 	}
 	console.log(req.body);
 
-	const { home, current } = req.body;
-	if (home) {
-		home.home = home;
-	}
+	const { home } = req.body;
+	homeCur.home = home;
 
-	if (current) {
-		home.current = current;
-	}
-
-	const updatedHome = await home.save();
+	const updatedHome = await homeCur.save();
 
 	res.status(200).json(updatedHome);
 });
