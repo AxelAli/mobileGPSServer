@@ -11,12 +11,11 @@ import protect from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.route('/').get(protect, getHomes);
+router.route('/').get(protect, getHomes).post(protect, createHome);
 
 router
 	.route('/:id')
 	.get(protect, getHomeById)
-	.post(protect, createHome)
 	.put(protect, updateHome)
 	.delete(protect, deleteHome);
 
