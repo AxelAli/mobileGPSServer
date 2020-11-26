@@ -59,8 +59,8 @@ app.use(cors());
 
 // Mount routers
 app.use('/api/homes', homes);
-app.use('/api/users', users);
 app.use('/api/locations', locations);
+app.use('/api/users', users);
 
 const PORT = process.env.PORT || 5000;
 
