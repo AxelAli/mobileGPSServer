@@ -1,12 +1,23 @@
 import mongoose from 'mongoose';
 
-const LocationSchema = new mongoose.Schema({
-	coordinates: {
-		type: [Object],
+const PointSchema = new mongoose.Schema({
+	latitude: {
+		type: Number,
+		required: true,
+	},
+	longitude: {
+		type: Number,
 		required: true,
 	},
 	avgPrice: {
 		type: Number,
+		required: true,
+	},
+});
+
+const LocationSchema = new mongoose.Schema({
+	points: {
+		type: [Object],
 		required: true,
 	},
 });
